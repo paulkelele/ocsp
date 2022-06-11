@@ -31,7 +31,6 @@ import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.cert.ocsp.BasicOCSPResp;
 import org.bouncycastle.cert.ocsp.CertificateID;
-import org.bouncycastle.cert.ocsp.CertificateStatus;
 import org.bouncycastle.cert.ocsp.OCSPReq;
 import org.bouncycastle.cert.ocsp.OCSPReqBuilder;
 import org.bouncycastle.cert.ocsp.OCSPResp;
@@ -43,11 +42,13 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 
 enum RefUrl {
 	OCSP(0), ISSUER_CERTIFICATE(1);
+
 	private final int ref;
 
 	private RefUrl(int ref) {
 		this.ref = ref;
 	}
+
 	public int getValue() {
 		return ref;
 	}
@@ -179,12 +180,12 @@ public class Main {
 				Object status = singleResp[0].getCertStatus();
 				SingleResp sr = singleResp[0];
 				sr.getCertStatus();
-				if (status == null || status == CertificateStatus.GOOD) {
-					System.out.println("Certificat: GOOD");
-				} else if (status instanceof org.bouncycastle.cert.ocsp.RevokedStatus) {
+				if (status instanceof org.bouncycastle.cert.ocsp.RevokedStatus) {
 					System.out.println("certificat: REVOKED");
-				} else {
+				} else if (status instanceof org.bouncycastle.cert.ocsp.UnknownStatus) {
 					System.out.println("certificat: UNKNOWN");
+				} else {
+					System.out.println("certificat: GOOD");
 				}
 			} else if (responseStatus == OCSPResponseStatus.INTERNAL_ERROR) {
 				System.out.println("ocsp server status : INTERNAL_ERROR");
