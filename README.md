@@ -6,4 +6,6 @@
 
 * the request to the ocsp responser server is POST. No GET.<br/>
 
-* the RFC 2560 accept GET request if the ocsp request length is less than 255 bytes.
+* the RFC 2560 accept GET request if the ocsp request length is less than 255 bytes. But it's not an obligation.<br/>
+
+* Java force to use GET under 255 bytes length request.
