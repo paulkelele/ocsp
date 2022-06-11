@@ -43,13 +43,11 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 
 enum RefUrl {
 	OCSP(0), ISSUER_CERTIFICATE(1);
-
 	private final int ref;
 
 	private RefUrl(int ref) {
 		this.ref = ref;
 	}
-
 	public int getValue() {
 		return ref;
 	}
