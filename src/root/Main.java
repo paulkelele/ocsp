@@ -89,13 +89,13 @@ public class Main {
 			System.exit(1);
 		}
 		System.out.println("..............Verify status certificate X.509 with OCSP...............");
-		File cc = new File(System.getProperty("user.dir"), args[0]);
+		File certFromDisk = new File(System.getProperty("user.dir"), args[0]);
 
 		Security.setProperty("crypto.policy", "unlimited");
 		Security.addProvider(new BouncyCastleProvider());
 		InputStream is = null;
 		try {
-			is = new FileInputStream(cc);
+			is = new FileInputStream(certFromDisk);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
