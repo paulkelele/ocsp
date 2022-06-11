@@ -73,11 +73,8 @@ class OCSPUrlException extends Exception {
 
 /**
  * Verify a X.509 certificate status with OCSP Used library: Bouncy Castle
- * version 1.71
- * necessary library in classpath: 
- * 		bcpkix-jdk18on-171.jar
- *   	bcprov-jdk18on-171.jar
- *   	bcutil-jdk18on-171.jar
+ * version 1.71 necessary library in classpath: bcpkix-jdk18on-171.jar
+ * bcprov-jdk18on-171.jar bcutil-jdk18on-171.jar
  * 
  * @author stef
  *
@@ -144,14 +141,16 @@ public class Main {
 		DigestCalculator digestCalculator = digestCalculatorProvider.get(CertificateID.HASH_SHA1);
 		CertificateID certId = new CertificateID(digestCalculator,
 				new X509CertificateHolder(issuerCertificate.getEncoded()), certificate.getSerialNumber());
-		
+
 		// create nonce to avoid replay attack
 		BigInteger nonce = BigInteger.valueOf(System.currentTimeMillis());
-		Extension ext = new Extension(OCSPObjectIdentifiers.id_pkix_ocsp_nonce,false,new DEROctetString(nonce.toByteArray()));
-		
+		Extension ext = new Extension(OCSPObjectIdentifiers.id_pkix_ocsp_nonce, false,
+				new DEROctetString(nonce.toByteArray()));
+
 		// basic request generation with nonce
 		OCSPReqBuilder requestBuilder = new OCSPReqBuilder();
-		OCSPReq ocspReq = requestBuilder.setRequestExtensions(new Extensions(new Extension[] {ext})).addRequest(certId).build();
+		OCSPReq ocspReq = requestBuilder.setRequestExtensions(new Extensions(new Extension[] { ext }))
+				.addRequest(certId).build();
 
 		byte[] data = ocspReq.getEncoded();
 		HttpURLConnection con = null;
@@ -177,7 +176,8 @@ public class Main {
 				System.out.println("ocsp server status : SUCCESSFUL");
 				BasicOCSPResp basicResponse = (BasicOCSPResp) ocspresp.getResponseObject();
 				SingleResp[] singleResp = basicResponse.getResponses();
-				if(singleResp.length != 1) throw new Exception("response lenght is anormal");
+				if (singleResp.length != 1)
+					throw new Exception("response lenght is anormal");
 				Object status = singleResp[0].getCertStatus();
 				SingleResp sr = singleResp[0];
 				sr.getCertStatus();
