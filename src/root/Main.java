@@ -74,6 +74,10 @@ class OCSPUrlException extends Exception {
 /**
  * Verify a X.509 certificate status with OCSP Used library: Bouncy Castle
  * version 1.71
+ * necessary library in classpath: 
+ * 		bcpkix-jdk18on-171.jar
+ *   	bcprov-jdk18on-171.jar
+ *   	bcutil-jdk18on-171.jar
  * 
  * @author stef
  *
