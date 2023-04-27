@@ -110,8 +110,8 @@ public class Main {
 			List<String> urlList = getAuthorityInformationAccessOcspUrls(certificate);
 			if (urlList.size() != 2)
 				throw new OCSPUrlException();
-			ocspURL = urlList.get(RefUrl.OCSP.getValue());
 			issuerCertificateURL = urlList.get(RefUrl.ISSUER_CERTIFICATE.getValue());
+			ocspURL = urlList.get(RefUrl.OCSP.getValue());
 		} catch (OCSPUrlException e) {
 			System.out.println(e.getMessage());
 			System.exit(1);
@@ -131,7 +131,6 @@ public class Main {
 			System.out.println("impossible to parse the issuer certificate");
 			System.out.println("program stop....");
 			System.exit(1);
-			// TODO: handle exception
 		}
 
 		// create id from certificate we wante to verify status
@@ -189,27 +188,27 @@ public class Main {
 				}
 			} else if (responseStatus == OCSPResponseStatus.INTERNAL_ERROR) {
 				System.out.println("ocsp server status : INTERNAL_ERROR");
-				System.err.println("cannot check certificate status");
+				System.err.println("cannot check certificate status: INTERNAL_ERROR");
 				System.exit(1);
 			} else if (responseStatus == OCSPResponseStatus.MALFORMED_REQUEST) {
 				System.out.println("ocsp server status : MALFORMED_REQUEST");
-				System.err.println("cannot check certificate status");
+				System.err.println("cannot check certificate status: MALFORMED_REQUEST");
 				System.exit(1);
 			} else if (responseStatus == OCSPResponseStatus.UNAUTHORIZED) {
 				System.out.println("ocsp server status : UNAUTHORIZED");
-				System.err.println("cannot check certificate status");
+				System.err.println("annot check certificate status: UNAUTHORIZED");
 				System.exit(1);
 			} else if (responseStatus == OCSPResponseStatus.SIG_REQUIRED) {
 				System.out.println("ocsp server status : SIG_REQUIRED");
-				System.err.println("cannot check certificate status");
+				System.err.println("cannot check certificate status: SIG_REQUIRED");
 				System.exit(1);
 			} else if (responseStatus == OCSPResponseStatus.TRY_LATER) {
 				System.out.println("ocsp server status : TRY_LATER");
-				System.err.println("cannot check certificate status");
+				System.err.println("cannot check certificate status: TRY_LATER");
 				System.exit(1);
 			} else {
 				System.out.println("ocsp server status : UNKNOWN");
-				System.err.println("cannot check certificate status");
+				System.err.println("cannot check certificate status: UNKNOWN");
 				System.exit(1);
 			}
 
