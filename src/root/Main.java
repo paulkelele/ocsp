@@ -42,13 +42,10 @@ import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
 
 enum RefUrl {
 	OCSP(0), ISSUER_CERTIFICATE(1);
-
 	private final int ref;
-
 	private RefUrl(int ref) {
 		this.ref = ref;
 	}
-
 	public int getValue() {
 		return ref;
 	}
@@ -56,7 +53,6 @@ enum RefUrl {
 
 class ArgsException extends Exception {
 	private static final long serialVersionUID = 1L;
-
 	public ArgsException(String message) {
 		super(message);
 	}
@@ -64,7 +60,6 @@ class ArgsException extends Exception {
 
 class OCSPUrlException extends Exception {
 	private static final long serialVersionUID = 1L;
-
 	public OCSPUrlException() {
 		super("cannot get ocsp url or issuer certificate from this certificate");
 	}
@@ -268,8 +263,7 @@ public class Main {
 				}
 			}
 		}
-
-		return ocspUrlList;
+	   return ocspUrlList;
 	}
 
 }
