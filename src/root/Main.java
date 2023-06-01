@@ -128,10 +128,11 @@ public class Main {
 			System.exit(1);
 		}
 
-		// create id from certificate we wante to verify status
+		// create digest calculator
 		JcaDigestCalculatorProviderBuilder digestCalculatorProviderBuilder = new JcaDigestCalculatorProviderBuilder();
 		DigestCalculatorProvider digestCalculatorProvider = digestCalculatorProviderBuilder.build();
 		DigestCalculator digestCalculator = digestCalculatorProvider.get(CertificateID.HASH_SHA1);
+		// create certificate id for certificate we want to verify status
 		CertificateID certId = new CertificateID(digestCalculator,
 				new X509CertificateHolder(issuerCertificate.getEncoded()), certificate.getSerialNumber());
 
