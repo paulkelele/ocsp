@@ -192,7 +192,7 @@ public class Main {
 				System.exit(1);
 			} else if (responseStatus == OCSPResponseStatus.UNAUTHORIZED) {
 				System.out.println("ocsp server status : UNAUTHORIZED");
-				System.err.println("annot check certificate status: UNAUTHORIZED");
+				System.err.println("cannot check certificate status: UNAUTHORIZED");
 				System.exit(1);
 			} else if (responseStatus == OCSPResponseStatus.SIG_REQUIRED) {
 				System.out.println("ocsp server status : SIG_REQUIRED");
